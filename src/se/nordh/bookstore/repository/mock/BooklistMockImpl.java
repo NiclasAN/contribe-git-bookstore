@@ -22,6 +22,8 @@ public class BooklistMockImpl implements BookList {
 	
 	@Override
 	public Book[] list(String searchString) {	
+		
+		//If first call of session, Downloads and adds online data into list of books
 		if(syncCheck == true) {
 			URL url;
 			try {
@@ -53,8 +55,20 @@ public class BooklistMockImpl implements BookList {
 			
 		}
 		
-		// TODO get list
-		// TODO search function or all
+		// TODO WIP
+		//Search Function
+		ArrayList<BookAndStock> resultList = new ArrayList<BookAndStock>();
+		int stockListLength = stockList.size();
+		for (int i = 0; i < stockListLength; i++) {
+			if(stockList.get(i).getBook().getTitle().contains(searchString) || 
+					stockList.get(i).getBook().getAuthor().contains(searchString)) {
+				
+				resultList.add(stockList.get(i));
+				
+			}
+		}
+		
+		// TODO add return statement
 		
 		return null;
 	}
