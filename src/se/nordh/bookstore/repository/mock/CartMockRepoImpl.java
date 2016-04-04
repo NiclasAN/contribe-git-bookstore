@@ -12,7 +12,6 @@ public class CartMockRepoImpl extends AbstractIdCounter implements CartRepositor
 
 	@Override
 	public long addBook(Book book) {
-		// TODO remove book from stock repo
 		Long id = getNewId();
 		cartMockList.put(id, book);
 		return id;
@@ -20,7 +19,6 @@ public class CartMockRepoImpl extends AbstractIdCounter implements CartRepositor
 
 	@Override
 	public void removeBook(long id) {
-		// TODO readd book to stock repo
 		cartMockList.remove(id);
 		
 	}

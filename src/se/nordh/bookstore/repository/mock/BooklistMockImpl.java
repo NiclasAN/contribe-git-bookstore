@@ -41,6 +41,7 @@ public class BooklistMockImpl implements BookList {
 						
 						String[] bookData = onlineStock.split(";");
 						Book book = new Book(bookData[0], bookData[1], StringToBigDecimal(bookData[2]));
+						
 						BookAndStock bookAndStock = new BookAndStock(book, StringToInteger(bookData[3]));
 						stockList.add(bookAndStock);
 						
@@ -55,22 +56,20 @@ public class BooklistMockImpl implements BookList {
 			
 		}
 		
-		// TODO WIP
 		//Search Function
-		ArrayList<BookAndStock> resultList = new ArrayList<BookAndStock>();
-		int stockListLength = stockList.size();
+		// TODO add full list return if searchString is unspecified
+		Book [] books = new Book[10];
+ 		int stockListLength = stockList.size();
 		for (int i = 0; i < stockListLength; i++) {
 			if(stockList.get(i).getBook().getTitle().contains(searchString) || 
 					stockList.get(i).getBook().getAuthor().contains(searchString)) {
 				
-				resultList.add(stockList.get(i));
+				books[i] = new Book(stockList.get(i).getBook().getTitle(), stockList.get(i).getBook().getAuthor(), stockList.get(i).getBook().getPrice());
 				
 			}
 		}
 		
-		// TODO add return statement
-		
-		return null;
+		return books;
 	}
 
 	@Override
@@ -82,7 +81,7 @@ public class BooklistMockImpl implements BookList {
 
 	@Override
 	public int[] buy(Book... books) {
-		// TODO Auto-generated method stub
+		// TODO Buy Logic
 		return null;
 	}
 	
