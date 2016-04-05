@@ -23,7 +23,7 @@ import se.nordh.bookstore.utilities.MiscUtilities;
 public class StoreMockRepoImpl extends AbstractIdCounter implements StoreRepository {
 	public Map<Long, BookAndStock> inventoryList = new HashMap<Long, BookAndStock>();
 	public Map<Long, BookAndStock> cartContent = new HashMap<Long, BookAndStock>();
-	private MiscUtilities miscUtilities;
+	private MiscUtilities miscUtilities = new MiscUtilities();
 
 	@Override
 	public long createBookAndStock(BookAndStock bookAndStock) {
@@ -115,7 +115,6 @@ public class StoreMockRepoImpl extends AbstractIdCounter implements StoreReposit
 					Book book = new Book(bookData[0], bookData[1], miscUtilities.StringToBigDecimal(bookData[2]));
 					BookAndStock bookAndStock = new BookAndStock(book, miscUtilities.StringToInteger(bookData[3]));
 					inventoryList.put(getNewId(), bookAndStock);
-
 				}
 
 			} catch (IOException e) {
@@ -166,6 +165,7 @@ public class StoreMockRepoImpl extends AbstractIdCounter implements StoreReposit
 		}
 
 		return new Receipt(totalPrice, receiptEntries);
+
 	}
 
 }
