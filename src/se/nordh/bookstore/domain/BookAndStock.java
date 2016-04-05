@@ -1,6 +1,7 @@
 package se.nordh.bookstore.domain;
 
 public class BookAndStock {
+	private long storageID;
 	private Book book;
 	private int stock;
 	
@@ -24,6 +25,14 @@ public class BookAndStock {
 
 	public void setStock(int stock) {
 		this.stock = stock;
+	}
+
+	public long getStorageID() {
+		return storageID;
+	}
+
+	public void setStorageID(long storageID) {
+		this.storageID = storageID;
 	}
 
 
