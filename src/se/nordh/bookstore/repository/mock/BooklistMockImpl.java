@@ -57,7 +57,6 @@ public class BooklistMockImpl implements BookList {
 		}
 		
 		//Search Function
-		// TODO add full list return if searchString is unspecified
 		Book [] books = new Book[10];
  		int stockListLength = stockList.size();
 		for (int i = 0; i < stockListLength; i++) {
@@ -81,7 +80,6 @@ public class BooklistMockImpl implements BookList {
 
 	@Override
 	public int[] buy(Book... books) {
-		// TODO Buy Logic
 		return null;
 	}
 	

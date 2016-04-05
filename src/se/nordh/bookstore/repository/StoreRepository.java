@@ -1,5 +1,6 @@
 package se.nordh.bookstore.repository;
 
+import java.util.Map;
 import java.util.Set;
 
 import se.nordh.bookstore.domain.BookAndStock;
@@ -12,13 +13,17 @@ public interface StoreRepository {
 	
 	BookAndStock getBookAndStock(long storageID);
 	
+	Map<Long, BookAndStock> findTitleOrAuthor(String searchString);
+	
 	Set<BookAndStock> getAllBooks();
 	
 	Set<BookAndStock> getBookAndStockByStorageID(long storageID);
 	
 	void deleteBookAndStock(long storageID);
 	
-	void clearStock();
+	void clearInventory();
+	
+	void clearCart();
 	
 	void getOnlineStock();
 	
@@ -27,5 +32,7 @@ public interface StoreRepository {
 	void RemoveFromCart(long storageID);
 	
 	int CashOut();
+	
+	
 	
 }
