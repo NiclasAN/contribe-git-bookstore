@@ -13,8 +13,11 @@ import java.util.Map.Entry;
 
 import se.nordh.bookstore.domain.Book;
 import se.nordh.bookstore.domain.BookAndStock;
+import se.nordh.bookstore.domain.Receipt;
+import se.nordh.bookstore.domain.ReceiptEntry;
 import se.nordh.bookstore.repository.StoreRepository;
 import se.nordh.bookstore.utilities.AbstractIdCounter;
+import se.nordh.bookstore.utilities.BuyStatus;
 import se.nordh.bookstore.utilities.MiscUtilities;
 
 public class StoreMockRepoImpl extends AbstractIdCounter implements StoreRepository {
@@ -133,7 +136,7 @@ public class StoreMockRepoImpl extends AbstractIdCounter implements StoreReposit
 	}
 
 	@Override
-	public void RemoveFromCart(long storageID) {
+	public void removeFromCart(long storageID) {
 		int amount = cartContent.get(storageID).getStock();
 		updateStock(storageID, getBookAndStock(storageID).getStock() + amount);
 		cartContent.remove(storageID);
@@ -141,10 +144,28 @@ public class StoreMockRepoImpl extends AbstractIdCounter implements StoreReposit
 	}
 
 	@Override
-	public int CashOut() {
-		// TODO Buy Logic
-		int price = 0;
-		return price;
+	public Receipt Buy() {
+		int totalPrice = 0;
+		Set<ReceiptEntry> receiptEntries = new HashSet<ReceiptEntry>();
+		for (Entry<Long, BookAndStock> entry : inventoryList.entrySet()) {
+			totalPrice = totalPrice + entry.getValue().getBook().getPrice().intValue();
+			if (entry.getValue().getStorageID() < 0) {
+				ReceiptEntry rEntry = new ReceiptEntry(entry.getValue().getBook().getPrice().intValue(),
+						BuyStatus.DOES_NOT_EXIST, entry.getValue().getBook());
+				receiptEntries.add(rEntry);
+			} else if (entry.getValue().getStock() < 0) {
+				ReceiptEntry rEntry = new ReceiptEntry(entry.getValue().getBook().getPrice().intValue(),
+						BuyStatus.NOT_IN_STOCK, entry.getValue().getBook());
+				receiptEntries.add(rEntry);
+			} else {
+				ReceiptEntry rEntry = new ReceiptEntry(entry.getValue().getBook().getPrice().intValue(), BuyStatus.OK,
+						entry.getValue().getBook());
+				receiptEntries.add(rEntry);
+			}
+
+		}
+
+		return new Receipt(totalPrice, receiptEntries);
 	}
 
 }

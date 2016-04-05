@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.Set;
 
 import se.nordh.bookstore.domain.BookAndStock;
+import se.nordh.bookstore.domain.Receipt;
 import se.nordh.bookstore.repository.StoreRepository;
 
 public class StoreServiceImpl implements StoreService {
@@ -61,13 +62,13 @@ public class StoreServiceImpl implements StoreService {
 
 	@Override
 	public void removeFromCart(long storageID) {
-		getStoreRepo().RemoveFromCart(storageID);
+		getStoreRepo().removeFromCart(storageID);
 		
 	}
 
 	@Override
-	public int CashOut() {
-		return getStoreRepo().CashOut();
+	public Receipt Buy() {
+		return getStoreRepo().Buy();
 	}
 
 	public StoreRepository getStoreRepo() {

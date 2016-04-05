@@ -12,5 +12,14 @@ public enum BuyStatus {
 	public int getValue() {
 		return value;
 	}
+	
+	public static String getStatusByValue(int value) {
+		for (BuyStatus e : BuyStatus.values()) {
+			if(value == e.value) {
+				return e.name();
+			}
+		}
+		return null;
+	}
 
 }

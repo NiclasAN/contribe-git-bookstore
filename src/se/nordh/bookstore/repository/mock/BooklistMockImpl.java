@@ -16,6 +16,12 @@ import se.nordh.bookstore.domain.Book;
 import se.nordh.bookstore.domain.BookAndStock;
 import se.nordh.bookstore.repository.BookList;
 
+/**
+ * Currently Unused cause I couldn't wrap my head around the interface
+ * @author Niclas
+ *
+ */
+
 public class BooklistMockImpl implements BookList {
 	public List<BookAndStock> stockList = new ArrayList<>();
 	private boolean syncCheck = true;

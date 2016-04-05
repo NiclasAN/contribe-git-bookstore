@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.Set;
 
 import se.nordh.bookstore.domain.BookAndStock;
+import se.nordh.bookstore.domain.Receipt;
 
 public interface StoreService {
 	
@@ -29,7 +30,7 @@ public interface StoreService {
 	
 	void removeFromCart(long storageID);
 	
-	int CashOut();
+	Receipt Buy();
 	
 	
 	
